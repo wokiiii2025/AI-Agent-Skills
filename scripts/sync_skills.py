@@ -44,17 +44,25 @@ def sync_one(entry):
     repo = entry["source_repo"]
     ref = entry.get("source_ref") or "main"
     source_path = entry["source_path"].strip("/")
+    source_file = (entry.get("source_file") or "").strip("/")
     with tempfile.TemporaryDirectory(prefix="skill-sync-") as td:
         td = Path(td)
         clone_dir = td / "src"
         run(["git", "clone", "--depth", "1", "--branch", ref, repo, str(clone_dir)])
-        src = clone_dir / source_path
-        if not src.exists():
-            raise FileNotFoundError(f"{skill}: source path not found: {source_path}")
         dest = SKILLS_DIR / skill
         if dest.exists():
             shutil.rmtree(dest)
-        shutil.copytree(src, dest, ignore=ignore_func)
+        if source_file:
+            src_file = clone_dir / source_file
+            if not src_file.exists():
+                raise FileNotFoundError(f"{skill}: source file not found: {source_file}")
+            dest.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src_file, dest / "SKILL.md")
+        else:
+            src = clone_dir / source_path
+            if not src.exists():
+                raise FileNotFoundError(f"{skill}: source path not found: {source_path}")
+            shutil.copytree(src, dest, ignore=ignore_func)
         if entry.get("rewrite_name"):
             skill_md = dest / "SKILL.md"
             if skill_md.exists():
@@ -66,6 +74,7 @@ def sync_one(entry):
                     name_line = f"name: {skill}"
                     description_match = re.search(r"(?ms)^description:\s*(.*?)(?=\n[a-zA-Z_-]+:|\Z)", fm)
                     description = description_match.group(1).rstrip() if description_match else ""
+                    description = description.replace("<", "`").replace(">", "`")
                     if description:
                         text = f"---\n{name_line}\ndescription: {description}\n---\n{body}"
                     else:
