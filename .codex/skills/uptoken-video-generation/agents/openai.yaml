@@ -1,0 +1,4 @@
+interface:
+  display_name: "UpToken Video Generation"
+  short_description: "Generate and download UpToken videos"
+  default_prompt: "Use $uptoken-video-generation to generate a short video from this prompt and save it locally."

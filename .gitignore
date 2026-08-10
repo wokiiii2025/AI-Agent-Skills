@@ -1,0 +1,18 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
+
+# secrets
+.env
+.env.*
+*.pem
+*.key
+**/.local/
+**/config.json
+**/providers.json
+**/credentials.json
+**/secrets.json
+!**/config.example.json
+!**/providers.example.json

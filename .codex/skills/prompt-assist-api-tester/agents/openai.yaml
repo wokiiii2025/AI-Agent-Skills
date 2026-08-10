@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prompt Assist API Tester"
+  short_description: "Compare prompt-assist text APIs against web presets."
+  default_prompt: "Use this skill to compare Ollama and the current prompt-assist API for text-to-image and image-to-image prompt generation using the exact web preset labels and selection modes."

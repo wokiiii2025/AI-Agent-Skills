@@ -1,0 +1,4 @@
+interface:
+  display_name: "OpenCode Server Deploy"
+  short_description: "Cross-platform OpenCode web deployment for SSH Linux servers."
+  default_prompt: "Deploy OpenCode web service on the server from .env, enable startup, configure automatic updates, apply the public access setting, and verify health."

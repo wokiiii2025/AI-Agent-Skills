@@ -1,0 +1,7 @@
+{
+  "side": "frontend|backend",
+  "baseUrl": "https://YOUR_API_HOST.example.com",
+  "project": "YOUR_PROJECT_KEY",
+  "lang": "zh-CN",
+  "token": "YOUR_API_TOKEN"
+}

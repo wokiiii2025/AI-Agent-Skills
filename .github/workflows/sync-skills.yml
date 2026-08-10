@@ -1,0 +1,24 @@
+name: Sync git-backed skills
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync upstream git skills
+        run: python scripts/sync_skills.py
+      - name: Update README tables
+        run: python scripts/update_readme.py
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: sync upstream skills"
+          file_pattern: ".codex/skills skills-sources.json README.md"

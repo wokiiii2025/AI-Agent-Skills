@@ -1,0 +1,4 @@
+interface:
+  display_name: "ComfyUI Storyboard Video"
+  short_description: "Make first-last-frame storyboard videos"
+  default_prompt: "Use $comfyui-storyboard-video to turn a character reference image into a coherent storyboard video."

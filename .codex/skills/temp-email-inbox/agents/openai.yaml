@@ -1,0 +1,7 @@
+interface:
+  display_name: "Temp Email Inbox"
+  short_description: "Free REST temp-mail inbox adapters"
+  default_prompt: "Use $temp-email-inbox to create a disposable inbox and poll for an expected test email."
+
+policy:
+  allow_implicit_invocation: true

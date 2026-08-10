@@ -1,0 +1,3 @@
+display_name: API Contract Collab
+short_description: 前后端 API 契约协作、问题上报和 OpenAPI 差异同步
+default_prompt: 使用 API Contract Collab 上报或处理前后端 API 对接问题
