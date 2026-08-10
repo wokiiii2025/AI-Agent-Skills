@@ -1,0 +1,3 @@
+display_name: Page Agent
+short_description: Integrate and operate Alibaba Page Agent for in-page GUI agents, Chrome extension, and MCP.
+default_prompt: Use $page-agent to inspect Page Agent docs and choose the correct SDK, extension, or MCP workflow.
