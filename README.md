@@ -79,6 +79,16 @@ bash scripts/install.sh
 | [`.codex/skills/ui-ux-pro-max`](.codex/skills/ui-ux-pro-max) | Local snapshot / upstream not detected | UI/UX design intelligence with searchable database |
 | [`.codex/skills/uptoken-video-generation`](.codex/skills/uptoken-video-generation) | Local snapshot / upstream not detected | Generate, poll, upload reference assets for, and locally download videos using the UpToken video generation API. Use when Codex needs to create reusable video generation workflows, test UpToken/Seedance models, turn prompts or storyboards into videos, use reference images/videos/audio, save generated MP4 files locally, inspect balance/costs, or automate text-to-video/image-to-video tasks. |
 
+## Collected repositories only — not installed
+
+These repositories are tracked as references only. They are not copied into `.codex/skills/`, not installed by `scripts/install.*`, and not synced by `scripts/sync_skills.py`.
+
+| Repository | Type | Contains skills | Notes |
+|---|---|---|---|
+| [Panniantong/Agent-Reach](https://github.com/Panniantong/Agent-Reach) | CLI / internet capability router / MCP-adjacent tooling | Yes: agent_reach/skill/SKILL.md; already represented by .codex/skills/agent-reach. | Give your AI agent eyes to see the entire internet. Read and search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu and more. collect-only; do not install from this list; source link: https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FPanniantong%2FAgent-Reach |
+| [iOfficeAI/OfficeCLI](https://github.com/iOfficeAI/OfficeCLI) | Office document automation CLI / SDK / skill source | Yes: root SKILL.md and multiple skills/officecli-* folders, but intentionally not imported. | Office suite purpose-built for AI agents to read, edit, and automate Word, Excel, and PowerPoint files without Office installation. collect-only; do not install from this list |
+| [Nutlope/hallmark](https://github.com/Nutlope/hallmark) | Design quality skill / anti-generic UI guidance | Yes: skills/hallmark/SKILL.md, but intentionally not imported. | Anti-AI-slop design skill for Claude Code, Cursor, and Codex. collect-only; do not install from this list |
+
 
 ## Notes
 

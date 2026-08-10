@@ -1,0 +1,35 @@
+{
+  "policy": "These repositories are collected for reference only. They are not installed, synced into .codex/skills, or used by install scripts.",
+  "repositories": [
+    {
+      "name": "Agent Reach",
+      "repo": "Panniantong/Agent-Reach",
+      "url": "https://github.com/Panniantong/Agent-Reach",
+      "source_link": "https://link.juejin.cn/?target=https%3A%2F%2Fgithub.com%2FPanniantong%2FAgent-Reach",
+      "description": "Give your AI agent eyes to see the entire internet. Read and search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu and more.",
+      "type": "CLI / internet capability router / MCP-adjacent tooling",
+      "contains_skills": "Yes: agent_reach/skill/SKILL.md; already represented by .codex/skills/agent-reach.",
+      "collection_policy": "collect-only; do not install from this list"
+    },
+    {
+      "name": "OfficeCLI",
+      "repo": "iOfficeAI/OfficeCLI",
+      "url": "https://github.com/iOfficeAI/OfficeCLI",
+      "homepage": "https://officecli.ai",
+      "description": "Office suite purpose-built for AI agents to read, edit, and automate Word, Excel, and PowerPoint files without Office installation.",
+      "type": "Office document automation CLI / SDK / skill source",
+      "contains_skills": "Yes: root SKILL.md and multiple skills/officecli-* folders, but intentionally not imported.",
+      "collection_policy": "collect-only; do not install from this list"
+    },
+    {
+      "name": "Hallmark",
+      "repo": "Nutlope/hallmark",
+      "url": "https://github.com/Nutlope/hallmark",
+      "homepage": "https://www.usehallmark.com/",
+      "description": "Anti-AI-slop design skill for Claude Code, Cursor, and Codex.",
+      "type": "Design quality skill / anti-generic UI guidance",
+      "contains_skills": "Yes: skills/hallmark/SKILL.md, but intentionally not imported.",
+      "collection_policy": "collect-only; do not install from this list"
+    }
+  ]
+}

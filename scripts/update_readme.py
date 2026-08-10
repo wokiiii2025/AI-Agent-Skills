@@ -4,6 +4,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 data = json.loads((ROOT / 'skills-sources.json').read_text(encoding='utf-8'))
 skills = sorted(data['skills'], key=lambda x: x['skill'].lower())
+collected_path = ROOT / 'collected-repositories.json'
 
 def esc(s):
     s = str(s or '').replace('\n',' ').replace('|','\\|')
@@ -23,6 +24,25 @@ for s in skills:
     rows.append(f"| {repo_path} | {src} | {esc(s.get('description'))} |")
 
 readme = f"""# AI Agent Skills\n\nA syncable collection of personal Codex / AI-agent skills. Skills are stored under `.codex/skills/` so agents can install or mirror them consistently.\n\n## Install\n\n### PowerShell\n\n```powershell\ngit clone https://github.com/wokiiii2025/AI-Agent-Skills.git\ncd AI-Agent-Skills\n./scripts/install.ps1\n```\n\n### Bash\n\n```bash\ngit clone https://github.com/wokiiii2025/AI-Agent-Skills.git\ncd AI-Agent-Skills\nbash scripts/install.sh\n```\n\n## Auto sync\n\n- Git-backed skills are listed in `skills-sources.json`.\n- Run `python scripts/sync_skills.py` to refresh them from upstream.\n- GitHub Actions workflow `.github/workflows/sync-skills.yml` runs daily and can also be triggered manually.\n- Local snapshot skills stay unchanged until manually updated because no upstream repository was detected in local metadata.\n\n## Skill catalog\n\n| 仓库路径 | 源开源仓库地址 | Skill 说明 |\n|---|---|---|\n""" + "\n".join(rows) + "\n\n"
+
+
+if collected_path.exists():
+    collected = json.loads(collected_path.read_text(encoding='utf-8'))
+    repos = collected.get('repositories', [])
+    if repos:
+        readme += "## Collected repositories only — not installed\n\n"
+        readme += "These repositories are tracked as references only. They are not copied into `.codex/skills/`, not installed by `scripts/install.*`, and not synced by `scripts/sync_skills.py`.\n\n"
+        readme += "| Repository | Type | Contains skills | Notes |\n|---|---|---|---|\n"
+        for item in repos:
+            label = esc(item.get('repo') or item.get('name'))
+            url = esc(item.get('url'))
+            repo_cell = f"[{label}]({url})" if url else label
+            note = esc(item.get('collection_policy'))
+            source_link = item.get('source_link')
+            if source_link:
+                note += f"; source link: {esc(source_link)}"
+            readme += f"| {repo_cell} | {esc(item.get('type'))} | {esc(item.get('contains_skills'))} | {esc(item.get('description'))} {note} |\n"
+        readme += "\n"
 
 dups = data.get('duplicates_skipped') or []
 if dups:
