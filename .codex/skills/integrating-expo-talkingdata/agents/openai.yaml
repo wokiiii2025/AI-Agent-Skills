@@ -1,0 +1,4 @@
+interface:
+  display_name: "Expo TalkingData 集成"
+  short_description: "处理 Expo 剪贴板归因、TalkingData 渠道与设备 ID 对接"
+  default_prompt: "使用 $integrating-expo-talkingdata 检查并完善我的 Expo 应用剪贴板归因与 TalkingData 集成。"

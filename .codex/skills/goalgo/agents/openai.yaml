@@ -1,0 +1,4 @@
+interface:
+  display_name: "GoalGo"
+  short_description: "快速澄清需求，生成并可确认启动 Codex Goal"
+  default_prompt: "Use $goalgo to clarify my request, draft a verifiable Goal, and wait for my explicit confirmation before starting it."

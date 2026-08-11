@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dev Tool Troubleshooting"
+  short_description: "Diagnose local dev toolchain failures"
+  default_prompt: "Use $dev-tool-troubleshooting to diagnose a failing local development command and propose the smallest safe fix."
