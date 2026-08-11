@@ -143,6 +143,30 @@
       "source_path": "skills/taste-skill-v1"
     },
     {
+      "skill": "dev-tool-troubleshooting",
+      "repo_path": ".codex/skills/dev-tool-troubleshooting",
+      "description": "Diagnose and fix local development toolchain failures. Use when Codex encounters failing dev commands, missing or wrong Node/Yarn/npm/pnpm versions, Metro or Expo startup issues, Android/ADB/Gradle/Java problems, port conflicts, native module errors, lockfile/package-manager drift, flaky build/test/lint/typecheck commands, or uncertainty about whether a failure is code-related versus environment-related.",
+      "snapshot_from": "/Users/macop/.codex/skills/dev-tool-troubleshooting",
+      "snapshot_root": "codex-personal",
+      "source_type": "local-snapshot",
+      "source_repo": "",
+      "source_ref": "",
+      "source_path": "",
+      "source_note": "No upstream Git repository was detected from local metadata; kept as a local snapshot."
+    },
+    {
+      "skill": "expo-mobile-safe-area",
+      "repo_path": ".codex/skills/expo-mobile-safe-area",
+      "description": "Diagnose, design, and fix Expo / React Native / Expo Router mobile safe-area, viewport, system bar, sticky or collapsible headers, fixed bottom actions/tabs, Android navigation bar, iOS Safari browser, iOS WebClip/PWA fullscreen, mobileconfig, browser-to-fullscreen handoff, pull-to-refresh, keyboard/visual viewport, and device/browser detection issues. Use when Codex works on top notch/status-bar overlap, sticky-header jank, fixed controls scrolling away, iPhone Safari address-bar collapse, bottom controls clipped during browser chrome changes, installed web app fullscreen resume, viewport-fit=cover, VisualViewport, safe-area-inset CSS env variables, or multi-platform Expo page layout.",
+      "snapshot_from": "/Users/macop/.codex/skills/expo-mobile-safe-area",
+      "snapshot_root": "codex-personal",
+      "source_type": "local-snapshot",
+      "source_repo": "",
+      "source_ref": "",
+      "source_path": "",
+      "source_note": "No upstream Git repository was detected from local metadata; kept as a local snapshot."
+    },
+    {
       "skill": "figma",
       "repo_path": ".codex/skills/figma",
       "description": "Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Figma URLs, node IDs, design-to-code implementation, or Figma MCP setup and troubleshooting.",
@@ -262,6 +286,18 @@
       "source_note": "No upstream Git repository was detected from local metadata; kept as a local snapshot."
     },
     {
+      "skill": "goalgo",
+      "repo_path": ".codex/skills/goalgo",
+      "description": "GoalGo：把普通需求通过快速复述、关键反问和答案累积，整理成可验证的 Codex Goal，并可在用户确认最终版本后直接启动。适用于“帮我写 Goal”“把需求变成 /goal”“反问我补齐信息”“生成后等我确认再运行”“启动目标模式”，以及用户对上一轮待确认 Goal 回复“开始”或“确认启动”等场景。默认只设计；只有展示当前版本并收到明确确认后，才调用 Goal 工具启动。",
+      "snapshot_from": "https://github.com/Backtthefuture/goalgo",
+      "snapshot_root": "git",
+      "source_type": "git",
+      "source_repo": "https://github.com/Backtthefuture/goalgo",
+      "source_ref": "main",
+      "source_path": "",
+      "source_note": "Git-backed skill synced by workflow into .codex/skills."
+    },
+    {
       "skill": "gpt-taste",
       "repo_path": ".codex/skills/gpt-taste",
       "description": "Elite UX/UI & Advanced GSAP Motion Engineer. Enforces Python-driven true randomization for layout variance, strict AIDA page structure, wide editorial typography (bans 6-line wraps), gapless bento grids, strict GSAP ScrollTriggers (pinning, stacking, scrubbing), inline micro-images, and massive section spacing.",
@@ -340,6 +376,30 @@
       "source_repo": "https://github.com/Leonxlnx/taste-skill",
       "source_ref": "taste-skill-v2",
       "source_path": "skills/brutalist-skill"
+    },
+    {
+      "skill": "integrating-expo-talkingdata",
+      "repo_path": ".codex/skills/integrating-expo-talkingdata",
+      "description": "Use when an Expo or React Native app needs Android first-launch clipboard attribution, dynamic channelSource parsing, TalkingData App Analytics Android or HTML5 integration, SDK device ID identity, channel reporting, zero-dashboard-data diagnosis, release APK verification, or ADB cold-start testing.",
+      "snapshot_from": "/Users/macop/.codex/skills/integrating-expo-talkingdata",
+      "snapshot_root": "codex-personal",
+      "source_type": "local-snapshot",
+      "source_repo": "",
+      "source_ref": "",
+      "source_path": "",
+      "source_note": "No upstream Git repository was detected from local metadata; kept as a local snapshot."
+    },
+    {
+      "skill": "jilemovie-cms-layout",
+      "repo_path": ".codex/skills/jilemovie-cms-layout",
+      "description": "Use when configuring JileMovie / 极乐影视 CMS layout floors, channel home pages, banner carousel, ads, card labels, display counts, card shape, filters, sorting, publishing, or verifying CMS data in the ops CMS.",
+      "snapshot_from": "/Users/macop/.codex/skills/jilemovie-cms-layout",
+      "snapshot_root": "codex-personal",
+      "source_type": "local-snapshot",
+      "source_repo": "",
+      "source_ref": "",
+      "source_path": "",
+      "source_note": "No upstream Git repository was detected from local metadata; kept as a local snapshot."
     },
     {
       "skill": "jilemovie-ui",
@@ -732,6 +792,18 @@
       "repo_path": ".codex/skills/uptoken-video-generation",
       "description": "Generate, poll, upload reference assets for, and locally download videos using the UpToken video generation API. Use when Codex needs to create reusable video generation workflows, test UpToken/Seedance models, turn prompts or storyboards into videos, use reference images/videos/audio, save generated MP4 files locally, inspect balance/costs, or automate text-to-video/image-to-video tasks.",
       "snapshot_from": "C:\\Users\\Administrator\\.codex\\skills\\uptoken-video-generation",
+      "snapshot_root": "codex-personal",
+      "source_type": "local-snapshot",
+      "source_repo": "",
+      "source_ref": "",
+      "source_path": "",
+      "source_note": "No upstream Git repository was detected from local metadata; kept as a local snapshot."
+    },
+    {
+      "skill": "vastai-ai-service-maintenance",
+      "repo_path": ".codex/skills/vastai-ai-service-maintenance",
+      "description": "Maintain AI services on a Vast.ai server, including safe in-place ComfyUI backend/frontend upgrades and Ollama service/model management. Preserves Vast.ai startup files, startup parameters, GPU-to-port mapping, local workspace state, ComfyUI custom node compatibility, and user-configured Ollama ports. Usually runs on the target server itself; SSH is optional only for remote debugging.",
+      "snapshot_from": "/Users/macop/.codex/skills/vastai-ai-service-maintenance",
       "snapshot_root": "codex-personal",
       "source_type": "local-snapshot",
       "source_repo": "",

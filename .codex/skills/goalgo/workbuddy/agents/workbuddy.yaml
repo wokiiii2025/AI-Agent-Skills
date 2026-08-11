@@ -1,0 +1,4 @@
+interface:
+  display_name: "GoalGo"
+  short_description: "快速澄清需求，生成并可确认启动执行计划"
+  default_prompt: "用 goalgo 来澄清我的需求，生成一个可验证的执行计划，等我明确确认后再启动执行。"

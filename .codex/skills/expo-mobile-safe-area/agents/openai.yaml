@@ -1,0 +1,4 @@
+interface:
+  display_name: "Expo Mobile Safe Area"
+  short_description: "Expo 吸顶、固定栏、安全区、系统栏与移动视口排障"
+  default_prompt: "Use $expo-mobile-safe-area to diagnose and fix an Expo sticky header, fixed bottom control, safe area, system bar, or mobile viewport issue."
