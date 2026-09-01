@@ -77,7 +77,7 @@ def rand_user(prefix: str = "codex") -> str:
 
 
 def normalize_message(m: dict) -> dict:
-    mid = m.get("id") or m.get("_id") or m.get("msg_id") or m.get("message_id")
+    mid = m.get("id") or m.get("_id") or m.get("msg_id") or m.get("message_id") or m.get("emailId") or m.get("email_id")
     return {
         "id": mid,
         "from": m.get("from") or m.get("from_email") or m.get("sender") or m.get("senderAddress"),
@@ -110,6 +110,130 @@ class Provider:
     def read(self, args): raise NotImplementedError
     def delete(self, args): raise NotImplementedError
 
+
+
+class XxpoCcCd(Provider):
+    name = "xxpo"
+    base_default = "https://xxpo.cc.cd/api"
+
+    def _base(self) -> str:
+        return (config_value("xxpo", "base_url", "XXPO_BASE_URL") or self.base_default).rstrip("/")
+
+    def _auth_headers(self) -> dict:
+        token = config_value("xxpo", "token", "XXPO_TOKEN")
+        if not token:
+            email = config_value("xxpo", "admin_email", "XXPO_ADMIN_EMAIL") or "admin@xxpo.cc.cd"
+            password = config_value("xxpo", "password", "XXPO_PASSWORD")
+            if not password:
+                raise RuntimeError("xxpo needs XXPO_PASSWORD or config/providers.json xxpo.password")
+            data = http_json("POST", f"{self._base()}/login", {"email": email, "password": password})
+            if not isinstance(data, dict) or data.get("code") not in (200, "200"):
+                raise RuntimeError(f"xxpo login failed: {data}")
+            token = ((data.get("data") or {}).get("token"))
+            if not token:
+                raise RuntimeError(f"xxpo login response has no token: {data}")
+        return {"Authorization": token, "Content-Type": "application/json"}
+
+    def _api(self, method: str, path: str, body: Optional[dict] = None, timeout: int = 25):
+        url = path if path.startswith("http") else f"{self._base()}{path}"
+        last = None
+        for attempt in range(3):
+            data = http_json(method, url, body, headers=self._auth_headers(), timeout=timeout)
+            last = data
+            if not (isinstance(data, dict) and data.get("code") in (401, "401")):
+                return data
+            time.sleep(1 + attempt)
+        return last
+
+    def create(self, args):
+        if args.address:
+            address = args.address
+        else:
+            domain = config_value("xxpo", "domain", "XXPO_DOMAIN") or "xxpo.cc.cd"
+            address = f"agent-{int(time.time())}-{''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(4))}@{domain}"
+        data = self._api("POST", "/account/add", {"email": address})
+        account = data.get("data") if isinstance(data, dict) else None
+        return {"provider": self.name, "email": address, "account_id": (account or {}).get("account_id") or (account or {}).get("accountId"), "raw": data}
+
+    def _messages_from_payload(self, data: Any) -> list:
+        if isinstance(data, list):
+            return data
+        if not isinstance(data, dict):
+            return []
+        payload = data.get("data", data)
+        if isinstance(payload, list):
+            return payload
+        if isinstance(payload, dict):
+            for key in ("list", "rows", "emails", "messages", "records", "data"):
+                val = payload.get(key)
+                if isinstance(val, list):
+                    return val
+            if payload.get("send_email") or payload.get("subject") or payload.get("content") or payload.get("text"):
+                return [payload]
+        return []
+
+    def _norm(self, m: dict) -> dict:
+        n = normalize_message(m)
+        n["from"] = m.get("send_email") or m.get("sendEmail") or n.get("from")
+        n["to"] = m.get("email") or m.get("receive_email") or m.get("account_email") or m.get("toEmail")
+        n["subject"] = m.get("subject") or n.get("subject")
+        n["code"] = (m.get("code") or None) or first_otp(m)
+        n["content"] = m.get("text") or m.get("content") or m.get("html") or m.get("body")
+        return n
+
+    def inbox(self, args):
+        headers = self._auth_headers()
+        tried = []
+        if getattr(args, "account_id", None):
+            tried.append(f"{self._base()}/email/latest?" + urllib.parse.urlencode({"accountId": args.account_id}))
+        else:
+            tried.append(f"{self._base()}/email/latest")
+        # Admin tokens on the current xxpo backend can create aliases but the user-scoped
+        # /email/* endpoints return code 401. Fall back to the documented admin-global list.
+        tried.append(f"{self._base()}/allEmail/list?page=1&size=50")
+        raw_results=[]
+        data=None
+        msgs=[]
+        for url in tried:
+            data = self._api("GET", url)
+            raw_results.append({"url": url, "code": data.get("code") if isinstance(data, dict) else None, "message": data.get("message") if isinstance(data, dict) else None})
+            if isinstance(data, dict) and data.get("code") not in (200, "200", None):
+                continue
+            msgs = self._messages_from_payload(data)
+            break
+        if args.address:
+            al = args.address.lower()
+            filtered=[]
+            for m in msgs:
+                if not isinstance(m, dict):
+                    continue
+                targets = [str(m.get(k, '')).lower() for k in ("email", "receive_email", "account_email", "to", "accountEmail", "toEmail")]
+                if not any(targets) or al in targets:
+                    filtered.append(m)
+            msgs = filtered
+        return {"provider": self.name, "email": args.address, "account_id": getattr(args, "account_id", None), "count": len(msgs), "messages": [self._norm(m) for m in msgs if isinstance(m, dict)], "raw": data, "tried": raw_results}
+
+    def read(self, args):
+        latest = self.inbox(args)
+        if args.id:
+            for m in latest.get("messages", []):
+                if str(m.get("id")) == str(args.id):
+                    return {"provider": self.name, "email": args.address, "id": args.id, "message": m, "otp": (m.get("code") or None) or first_otp(m)}
+        if latest.get("messages"):
+            m = latest["messages"][0]
+            return {"provider": self.name, "email": args.address, "id": m.get("id"), "message": m, "otp": (m.get("code") or None) or first_otp(m)}
+        return {"provider": self.name, "email": args.address, "id": args.id, "message": None, "otp": None}
+
+    def delete(self, args):
+        if not args.id:
+            raise RuntimeError("xxpo delete needs --id/emailId")
+        # Frontend API uses DELETE /email/delete?emailIds=ID for mailbox messages;
+        # /allEmail/delete?emailIds=ID also works for admin-global list items.
+        q = urllib.parse.urlencode({"emailIds": args.id})
+        data = self._api("DELETE", f"/email/delete?{q}")
+        if isinstance(data, dict) and data.get("code") not in (200, "200", None):
+            data = self._api("DELETE", f"/allEmail/delete?{q}")
+        return {"provider": self.name, "email": args.address, "id": args.id, "deleted": isinstance(data, dict) and data.get("code") in (200, "200"), "raw": data}
 
 class TempMailC(Provider):
     name = "tempmailc"
@@ -246,7 +370,7 @@ class MailCX(Provider):
         return {"provider": self.name, "email": args.address, "id": args.id, "deleted": True, "raw": data}
 
 
-PROVIDERS = {p.name: p for p in (TempMailC(), Catchmail(), MailTM(), MailCX())}
+PROVIDERS = {p.name: p for p in (XxpoCcCd(), TempMailC(), Catchmail(), MailTM(), MailCX())}
 
 
 def first_otp(obj: Any) -> Optional[str]:
@@ -319,11 +443,12 @@ def cmd_test(provider: Provider, args):
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Temporary email inbox CLI")
     parser.add_argument("command", choices=["create", "inbox", "read", "delete", "wait", "test"])
-    parser.add_argument("--provider", choices=sorted(PROVIDERS), default="tempmailc")
+    parser.add_argument("--provider", choices=sorted(PROVIDERS), default="xxpo")
     parser.add_argument("--address")
     parser.add_argument("--id")
     parser.add_argument("--password")
     parser.add_argument("--token")
+    parser.add_argument("--account-id")
     parser.add_argument("--timeout", type=int, default=120)
     parser.add_argument("--interval", type=float, default=5)
     parser.add_argument("--otp", action="store_true")

@@ -1,0 +1,8 @@
+interface:
+  display_name: "Yongge VPS Node"
+  short_description: "通过对话维护 VPS 节点、固定隧道、AI Web 服务和端口/反代问题"
+  default_prompt: "Use $yongge-vps-node to configure or repair a VPS node/service, including Cloudflare fixed Tunnel subscriptions, SSH port hardening, or DeepSeek Harness/Hermes web service deployment."
+policy:
+  allow_implicit_invocation: true
+
+

@@ -694,14 +694,14 @@
     {
       "skill": "temp-email-inbox",
       "repo_path": ".codex/skills/temp-email-inbox",
-      "description": "Create and use free temporary email inboxes through HTTP REST APIs for QA, signup/reset/OTP testing, and automation. Use when Codex needs disposable email addresses, multi-provider temp-mail receiving, polling inboxes, reading email bodies, extracting OTP codes, or validating that a test email was delivered without using a real mailbox. Supports tempmailc, catchmail, mail.tm, and mail.cx adapters.",
+      "description": "Create and use free temporary email inboxes through HTTP REST APIs for QA, signup/reset/OTP testing, and automation. Use when Codex needs disposable email addresses, multi-provider temp-mail receiving, polling inboxes, reading email bodies, extracting OTP codes, or validating that a test email was delivered without using a real mailbox. Supports the private xxpo.cc.cd mailbox API as the bold/default first option, plus tempmailc, catchmail, mail.tm, and mail.cx adapters.",
       "snapshot_from": "C:\\Users\\Administrator\\.codex\\skills\\temp-email-inbox",
       "snapshot_root": "codex-personal",
       "source_type": "local-snapshot",
       "source_repo": "",
       "source_ref": "",
       "source_path": "",
-      "source_note": "No upstream Git repository was detected from local metadata; kept as a local snapshot."
+      "source_note": "Local snapshot with private xxpo API support; secrets are intentionally excluded."
     },
     {
       "skill": "ui-styling",
@@ -732,6 +732,18 @@
       "repo_path": ".codex/skills/uptoken-video-generation",
       "description": "Generate, poll, upload reference assets for, and locally download videos using the UpToken video generation API. Use when Codex needs to create reusable video generation workflows, test UpToken/Seedance models, turn prompts or storyboards into videos, use reference images/videos/audio, save generated MP4 files locally, inspect balance/costs, or automate text-to-video/image-to-video tasks.",
       "snapshot_from": "C:\\Users\\Administrator\\.codex\\skills\\uptoken-video-generation",
+      "snapshot_root": "codex-personal",
+      "source_type": "local-snapshot",
+      "source_repo": "",
+      "source_ref": "",
+      "source_path": "",
+      "source_note": "No upstream Git repository was detected from local metadata; kept as a local snapshot."
+    },
+    {
+      "skill": "yongge-vps-node",
+      "repo_path": ".codex/skills/yongge-vps-node",
+      "description": "Conversation-driven VPS operations for proxy nodes and AI web services on SSH servers. Use when Codex needs to add, inspect, repair, migrate, or maintain VPS proxy nodes through dialogue (sing-box-yg, Cloudflare fixed Tunnel, domain-only Clash/OpenClash subscriptions, SSH random 5-digit port rotation) or deploy/repair VPS-hosted AI web tools such as DeepSeek Harness/dsh Web, Hermes, and reverse-proxy/security-group issues.",
+      "snapshot_from": "C:\\Users\\Administrator\\.codex\\skills\\yongge-vps-node",
       "snapshot_root": "codex-personal",
       "source_type": "local-snapshot",
       "source_repo": "",

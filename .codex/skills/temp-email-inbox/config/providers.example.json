@@ -1,4 +1,10 @@
 {
+  "xxpo": {
+    "base_url": "https://xxpo.cc.cd/api",
+    "admin_email": "admin@xxpo.cc.cd",
+    "password": "REPLACE_ME",
+    "domain": "xxpo.cc.cd"
+  },
   "mailcx": {
     "token": "tm_live_REPLACE_ME"
   }
