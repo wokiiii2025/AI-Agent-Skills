@@ -342,6 +342,18 @@
       "source_path": "skills/brutalist-skill"
     },
     {
+      "skill": "jile-cms-layout-config",
+      "repo_path": ".codex/skills/jile-cms-layout-config",
+      "description": "Project-specific skill for configuring JileMovie/极乐影视 CMS layout pages in the admin backend and aligning them with Expo front-end rendering. Use when Codex needs to edit, audit, or explain CMS 楼层配置, 成人/观影模式推荐页, 底部菜单页面, 视频/漫画/小说综合楼层, right-side data configuration, module types, display modes, card variants, tag configs, or verify how CMS pages render in the app.",
+      "snapshot_from": "C:\\Users\\Administrator\\.codex\\skills\\jile-cms-layout-config",
+      "snapshot_root": "codex-personal",
+      "source_type": "local-snapshot",
+      "source_repo": "",
+      "source_ref": "",
+      "source_path": "",
+      "source_note": "No upstream Git repository was detected from local metadata; kept as a local snapshot."
+    },
+    {
       "skill": "jilemovie-ui",
       "repo_path": ".codex/skills/jilemovie-ui",
       "description": "Project-specific UI implementation skill for Expo-Movie/JILEMOVIE. Use when Codex needs to create, modify, audit, or standardize project UI pages/components with existing JileMovie components, including headers, tabs, banners, floors, media cards, adult-mode video/manga/novel layouts, spacing, typography, radius, theme tokens, safe areas, and /jilemovie-ui component-library standards.",
